@@ -1,5 +1,6 @@
 package kr.kro.fatcats
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -72,7 +73,7 @@ class MainActivity : AppCompatActivity() , CoroutineScope {
                                response.body()?.let { SearchPoiInfo ->
                                    val item = SearchPoiInfo.searchPoiInfo.pois.poi.map {
                                         AddressDataList(
-                                           name = it.name?:"빌딩명 없",
+                                           name = it.name?:"빌딩명 없음",
                                            fullAddress = makeMainAddress(it),
                                             locationLatLng = LocationLatLnd(
                                                it.noorLat.toFloat(),
@@ -80,7 +81,11 @@ class MainActivity : AppCompatActivity() , CoroutineScope {
                                             )
                                        )
                                    }
-                                   mAdapter.additem(item)
+                                   mAdapter.additem(item){
+                                       startActivity(
+                                           Intent(this@MainActivity,MapActivity::class.java)
+                                       )
+                                   }
 
                                }
                            }

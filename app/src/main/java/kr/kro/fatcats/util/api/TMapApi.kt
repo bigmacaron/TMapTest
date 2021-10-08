@@ -10,9 +10,9 @@ interface TMapApi {
 
     @GET("/tmap/pois")
     suspend fun getSearchLocation(
-        @Query("appKey") appKey:String = Constants.API_KEY,
+        @Query("appKey") appKey:String = Constants.TMap.API_KEY,
         @Query("version") version:String = "1",
-        @Query("count") count : String = "20",
+        @Query("count") count : String = "100",
         @Query("searchKeyword") searchKeyword : String
     ): Response<SearchPoiInfo?>
 }
